@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "auth/src/routes/authRoutes.js";
-import studyPlanRoutes from "studyPlan/src/routes/studyPlanRoutes.js";
+import studyPlanRoutes from "studyplan/src/routes/studyPlanRoutes.js";
+import interviewRoutes from "interview/src/routes/interviewRoutes.js";
 import { connectDB } from "auth";
 
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/studyplan", studyPlanRoutes);
+app.use("/api/interview", interviewRoutes);
 
 app.get("/", (req, res) => {
   res.send("API Running with MongoDB Integration");
