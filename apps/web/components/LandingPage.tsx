@@ -53,6 +53,12 @@ export default function LandingPage() {
             <a href="#pricing" className="hover:text-white transition-colors">
               Pricing
             </a>
+            <Link
+              href="/interview"
+              className="hover:text-white transition-colors"
+            >
+              Mock Interviews
+            </Link>
           </div>
           <div className="hidden sm:flex items-center gap-4">
             <Link
@@ -113,11 +119,15 @@ export default function LandingPage() {
                 >
                   Pricing
                 </a>
+                <Link
+                  href="/interview"
+                  className="block px-2 py-2 text-sm text-white/70 hover:text-white transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Mock Interviews
+                </Link>
                 <div className="flex flex-col gap-2 pt-2">
-                  <Link
-                    href="/login"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
+                  <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                     <GlassButton className="w-full py-2.5 text-sm">
                       Log in
                     </GlassButton>
