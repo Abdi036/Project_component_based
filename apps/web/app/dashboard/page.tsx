@@ -1,7 +1,13 @@
 "use client";
 
 import { useAuth } from "@/context/auth-context";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -49,10 +55,12 @@ export default function Dashboard() {
             </Button>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Mock Interviews</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Mock Interviews
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold mb-2">0</div>

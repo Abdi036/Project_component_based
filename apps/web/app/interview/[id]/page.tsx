@@ -98,7 +98,9 @@ export default function InterviewDisplayPage() {
   if (!currentQuestion) {
     return (
       <div className="container mx-auto p-4 text-center">
-        <h2 className="text-2xl font-bold">No questions found for this interview</h2>
+        <h2 className="text-2xl font-bold">
+          No questions found for this interview
+        </h2>
         <Button onClick={() => router.push("/interview")} className="mt-4">
           Go Back
         </Button>
