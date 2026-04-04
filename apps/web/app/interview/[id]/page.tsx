@@ -30,6 +30,17 @@ export default function InterviewDisplayPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
 
+  const deleteInterview = async () => {
+    if (!confirm("Are you sure you want to delete this interview?")) return;
+    try {
+      await api.delete(`/interview/${id}`);
+      toast.success("Interview deleted");
+      router.push("/interview");
+    } catch (error) {
+      toast.error("Failed to delete interview");
+    }
+  };
+
   useEffect(() => {
     const fetchInterview = async () => {
       try {
@@ -63,17 +74,6 @@ export default function InterviewDisplayPage() {
     }
   };
 
-  const deleteInterview = async () => {
-    if (!confirm("Are you sure you want to delete this interview?")) return;
-    try {
-      await api.delete(`/interview/${id}`);
-      toast.success("Interview deleted");
-      router.push("/interview");
-    } catch (error) {
-      toast.error("Failed to delete interview");
-    }
-  };
-
   if (loading) {
     return (
       <div className="flex h-[50vh] items-center justify-center">
@@ -93,7 +93,18 @@ export default function InterviewDisplayPage() {
     );
   }
 
-  const currentQuestion = interview.questions[currentQuestionIndex];
+  const currentQuestion = interview.questions?.[currentQuestionIndex];
+
+  if (!currentQuestion) {
+    return (
+      <div className="container mx-auto p-4 text-center">
+        <h2 className="text-2xl font-bold">No questions found for this interview</h2>
+        <Button onClick={() => router.push("/interview")} className="mt-4">
+          Go Back
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-4 max-w-4xl space-y-6">
@@ -124,13 +135,13 @@ export default function InterviewDisplayPage() {
           <div className="flex justify-between items-center">
             <CardTitle>
               Question {currentQuestionIndex + 1} of{" "}
-              {interview.questions.length}
+              {interview.questions?.length || 0}
             </CardTitle>
             <div className="flex gap-2">
               <Badge variant="outline">
-                {currentQuestion.topic || "General"}
+                {currentQuestion?.topic || "General"}
               </Badge>
-              {currentQuestion.difficulty && (
+              {currentQuestion?.difficulty && (
                 <Badge>{currentQuestion.difficulty}</Badge>
               )}
             </div>
@@ -139,7 +150,7 @@ export default function InterviewDisplayPage() {
         <CardContent className="flex-1 p-6 flex flex-col justify-between space-y-8">
           <div className="space-y-6">
             <h2 className="text-xl font-semibold leading-relaxed">
-              {currentQuestion.questionText}
+              {currentQuestion?.questionText}
             </h2>
 
             {showAnswer ? (
@@ -148,7 +159,7 @@ export default function InterviewDisplayPage() {
                   Suggested Answer/Approach:
                 </h3>
                 <p className="text-muted-foreground">
-                  {currentQuestion.suggestedAnswer}
+                  {currentQuestion?.suggestedAnswer}
                 </p>
               </div>
             ) : (

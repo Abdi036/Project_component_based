@@ -77,13 +77,13 @@ export default function StudyPlanDetails() {
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div>
               <CardTitle className="text-3xl font-bold">
-                {plan.inputs.jobRole} Interview Prep
+                {plan.inputs?.jobRole || 'Custom'} Interview Prep
               </CardTitle>
               <div className="flex gap-2 mt-4 flex-wrap">
-                <Badge variant="secondary">{plan.inputs.interviewType}</Badge>
-                <Badge variant="secondary">{plan.inputs.experienceLevel}</Badge>
+                <Badge variant="secondary">{plan.inputs?.interviewType}</Badge>
+                <Badge variant="secondary">{plan.inputs?.experienceLevel || `${plan.inputs?.yearsOfExperience} yrs exp`}</Badge>
                 <Badge variant="secondary">
-                  {plan.inputs.duration.value} {plan.inputs.duration.unit}(s)
+                  {plan.inputs?.duration?.value} {plan.inputs?.duration?.unit}(s)
                 </Badge>
               </div>
             </div>
@@ -91,7 +91,7 @@ export default function StudyPlanDetails() {
               <span>
                 Created: {new Date(plan.createdAt).toLocaleDateString()}
               </span>
-              <span>For: {plan.inputs.tools?.join(", ")}</span>
+              <span>For: {plan.inputs?.tools?.join(", ")}</span>
             </div>
           </div>
         </CardHeader>
