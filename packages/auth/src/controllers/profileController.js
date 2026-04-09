@@ -28,7 +28,9 @@ const uploadAvatar = async (fileBuffer) => {
       {
         folder: "avatars",
         allowed_formats: ["jpg", "png", "jpeg", "webp"],
-        transformation: [{ width: 300, height: 300, crop: "fill", gravity: "face" }],
+        transformation: [
+          { width: 300, height: 300, crop: "fill", gravity: "face" },
+        ],
       },
       (error, result) => {
         if (error) {
@@ -81,10 +83,14 @@ export const updateProfile = async (req, res) => {
       return res.status(400).json({ message: "Nothing to update" });
     }
 
-    const updatedUser = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
-      new: true,
-      runValidators: true,
-    }).select("-password");
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      fieldsToUpdate,
+      {
+        new: true,
+        runValidators: true,
+      },
+    ).select("-password");
 
     return res.status(200).json({
       success: true,

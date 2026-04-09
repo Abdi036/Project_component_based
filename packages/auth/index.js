@@ -5,4 +5,4 @@ export { protect, authorize } from "./src/middleware/authMiddleware.js";
 export { generateToken, verifyToken } from "./src/utils/jwt.js";
 export { authRoutes };
 export { profileRoutes };
-export { connectDB } from './src/config/db.js';
+export { connectDB } from "./src/config/db.js";
