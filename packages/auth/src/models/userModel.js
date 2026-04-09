@@ -17,7 +17,23 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
+      enum: ["admin", "user"],
       default: "user",
+    },
+    token: {
+      type: Number,
+      default: 3,
+      min: 0,
+    },
+    avatar: {
+      public_id: {
+        type: String,
+        default: "",
+      },
+      url: {
+        type: String,
+        default: "",
+      },
     },
     profileData: {
       type: Object,

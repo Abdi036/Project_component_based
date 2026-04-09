@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "auth/src/routes/authRoutes.js";
+import profileRoutes from "auth/src/routes/profileRoutes.js";
 import studyPlanRoutes from "studyplan/src/routes/studyPlanRoutes.js";
 import interviewRoutes from "interview/src/routes/interviewRoutes.js";
 import { connectDB } from "auth";
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/profile", profileRoutes);
 app.use("/api/studyplan", studyPlanRoutes);
 app.use("/api/interview", interviewRoutes);
 

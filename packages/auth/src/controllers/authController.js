@@ -15,7 +15,14 @@ export const register = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const userRole = role || "user"; // default role
+    const allowedRoles = ["admin", "user"];
+    const userRole = role || "user";
+
+    if (!allowedRoles.includes(userRole)) {
+      return res.status(400).json({
+        message: "Invalid role. Allowed roles are admin and user",
+      });
+    }
 
     const user = await authService.createUser({
       name,
@@ -30,6 +37,7 @@ export const register = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        tokenBalance: user.token,
         token: generateToken(user.id, user.role),
       });
     } else {
@@ -52,6 +60,7 @@ export const login = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        tokenBalance: user.token,
         token: generateToken(user.id, user.role),
       });
     } else {
@@ -71,34 +80,8 @@ export const getProfile = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        tokenBalance: user.token,
         profileData: user.profileData || {},
-      });
-    } else {
-      res.status(404).json({ message: "User not found" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-export const updateProfile = async (req, res) => {
-  try {
-    const user = await authService.findUserById(req.user.id);
-    if (user) {
-      const updatedUser = await authService.updateUserProfile(req.user.id, {
-        name: req.body.name || user.name,
-        profileData: {
-          ...user.profileData,
-          ...req.body.profileData,
-        },
-      });
-
-      res.json({
-        _id: updatedUser.id,
-        name: updatedUser.name,
-        email: updatedUser.email,
-        role: updatedUser.role,
-        profileData: updatedUser.profileData,
       });
     } else {
       res.status(404).json({ message: "User not found" });
