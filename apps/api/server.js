@@ -5,6 +5,7 @@ import authRoutes from "auth/src/routes/authRoutes.js";
 import profileRoutes from "auth/src/routes/profileRoutes.js";
 import studyPlanRoutes from "studyplan/src/routes/studyPlanRoutes.js";
 import interviewRoutes from "interview/src/routes/interviewRoutes.js";
+import pricingRoutes from "pricing/src/routes/pricingRoutes.js";
 import { connectDB } from "auth";
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/studyplan", studyPlanRoutes);
 app.use("/api/interview", interviewRoutes);
+app.use("/api/pricing", pricingRoutes);
 
 app.get("/", (req, res) => {
   res.send("API Running with MongoDB Integration");
