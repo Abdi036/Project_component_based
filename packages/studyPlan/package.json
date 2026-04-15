@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@google/genai": "*",
+    "auth": "file:../auth",
     "express": "^4.18.2",
     "mongoose": "^8.0.0"
   }

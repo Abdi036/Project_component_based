@@ -1,4 +1,5 @@
 const express = require("express");
+const { protect } = require("auth/src/middleware/authMiddleware.js");
 const {
   generateStudyPlan,
   getMyStudyPlans,
@@ -8,8 +9,8 @@ const {
 
 const router = express.Router();
 
-// Note: A real implementation would apply authentication middleware here
-// e.g., router.use(protect);
+// Apply authentication middleware to all routes
+router.use(protect);
 
 router.post("/generate", generateStudyPlan);
 router.get("/mine", getMyStudyPlans);
