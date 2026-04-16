@@ -1,0 +1,19 @@
+{
+  "name": "notification",
+  "version": "1.0.0",
+  "description": "Notification module for managing user notifications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "notification"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "mongoose": "^9.3.1",
+    "express": "^5.2.1"
+  }
+}
